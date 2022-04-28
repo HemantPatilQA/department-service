@@ -1,0 +1,78 @@
+{
+  "consumer": {
+    "name": "customer_consumer"
+  },
+  "interactions": [
+    {
+      "description": "A request for Department data",
+      "providerStates": [
+        {
+          "name": "Department GET: the department ID matches an existing department ID"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/departments/1"
+      },
+      "response": {
+        "body": {
+          "departmentAddress": "Aundh",
+          "departmentCode": "IT-001",
+          "departmentId": 1,
+          "departmentName": "IT"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.departmentAddress": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.departmentCode": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.departmentId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.departmentName": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.2.7"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "department_provider"
+  }
+}
